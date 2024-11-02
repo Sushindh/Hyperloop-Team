@@ -1,16 +1,28 @@
 import Home from "./Home.jsx"
 import About from "./About.jsx"
-import FKC from "./FastKmCalculator.jsx"
+import HP1 from "./HyperloopProject (1).jsx"
 import Map from "./Map12.jsx"
-import {Link} from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
-function Navbar(){
-    return(
-        <div className="flex justify-center items-center pt-2" >
-            <button className="font-semibold font-sans text-xl  hover:text-white hover:backdrop-blur-sm hover:bg-emerald-100/30 h-12 w-20 rounded-sm flex justify-center items-center " ><Link to="/Home" >Home</Link></button>
-            <button className="font-semibold font-sans text-xl  hover:text-white hover:backdrop-blur-sm hover:bg-emerald-100/30 h-12 w-52 rounded-md flex justify-center items-center " ><Link to="/About" >About The Project</Link></button>
-            <button className="font-semibold font-sans text-xl  hover:text-white hover:backdrop-blur-sm hover:bg-emerald-100/30 h-12 w-52 rounded-md flex justify-center items-center " ><Link to="/FKC" > Check Distance</Link></button>
-            <button className="font-semibold font-sans text-xl  hover:text-white hover:backdrop-blur-sm hover:bg-emerald-100/30 h-12 w-52 rounded-md flex justify-center items-center " ><Link to="/Map" > Current Routes</Link></button>
+function Navbar() {
+    const location = useLocation();
+
+    const getNavLinkClass = (path) => {
+        const baseClasses = "font-semibold font-sans text-xl h-12 rounded-md flex justify-center items-center transition-all duration-200";
+        const activeClasses = "text-white backdrop-blur-sm bg-emerald-100/30";
+        const hoverClasses = "hover:text-white hover:backdrop-blur-sm hover:bg-emerald-100/30";
+        
+        return `${baseClasses} ${location.pathname === path ? activeClasses : hoverClasses} ${
+            path === "/Home" ? "w-20 rounded-sm" : "w-52"
+        }`;
+    };
+
+    return (
+        <div className="flex justify-center items-center pl-1 pt-2">
+            <Link to="/Home" className={getNavLinkClass("/Home")}>Home</Link>
+            <Link to="/About" className={getNavLinkClass("/About")}>About The Project</Link>
+            <Link to="/HP1" className={getNavLinkClass("/HP1")}>Hyperloop Simulation</Link>
+            <Link to="/Map" className={getNavLinkClass("/Map")}>Current Routes</Link>
         </div>
     );
 }
