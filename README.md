@@ -2,7 +2,7 @@
 
 Welcome to the *Hyperloop Control Center, a real-time control and monitoring system for tracking a simulated hyperloop route from **Chennai* to *Bangalore*. This project demonstrates a high-speed train simulation with live updates on speed, energy consumption, network stats, and position tracking on a real-time map.
 
-![Hyperloop Dashboard](./assets/hyperloop_dashboard.png)
+![Hyperloop Dashboard](https://via.placeholder.com/800x400?text=Hyperloop+Dashboard)
 
 ## 📋 Features
 
@@ -12,7 +12,7 @@ Welcome to the *Hyperloop Control Center, a real-time control and monitoring sys
 - *Energy Monitoring*: Calculates energy consumption as the train progresses.
 - *Graphical Analysis*: Displays real-time graphs for speed, distance, network speed, and energy consumption.
 
-![Real-Time Map](./assets/realtime_map.png)
+![Real-Time Map](https://via.placeholder.com/800x400?text=Real-Time+Map)
 
 ## 🛠 Tech Stack
 
