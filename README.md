@@ -26,7 +26,8 @@ Welcome to the *Hyperloop Control Center, a real-time control and monitoring sys
 Follow these instructions to set up and run the project on your local machine.
 
 ### Prerequisites
-
+- *React.js*
+- *Tailwind.css*
 - *Node.js* (version 14 or later)
 - *npm* or *yarn* package manager
 
