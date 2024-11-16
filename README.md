@@ -23,13 +23,12 @@ Welcome to the *Hyperloop Control Center, a real-time control and monitoring sys
 - *Recharts* for graphical representation of data.
 - *JavaScript/ES6* for simulation logic.
 
-## 🚀 Getting Started
+## 🚀 Vercel Link
 
-Follow these instructions to set up and run the project on your local machine.
+https://hyperloop-team-git-main-sushindh-as-projects.vercel.app/
 
 ### Prerequisites
 - *React.js*
 - *Tailwind.css*
-
 
 
