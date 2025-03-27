@@ -8,7 +8,7 @@ const Login = () => {
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-      {/* Enhanced Background with Animation */}
+      
       <div className="absolute inset-0">
         <img 
           src={Bg} 
@@ -18,21 +18,21 @@ const Login = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 animate-gradient" />
       </div>
 
-      {/* Login Card with Glassmorphism */}
+      
       <div className="relative w-full max-w-md mx-4 p-8 bg-white/20 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20 animate-fade-in">
-        {/* Decorative Elements */}
+
         <div className="absolute -top-10 -left-10 w-20 h-20 bg-blue-500/20 rounded-full blur-xl" />
         <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-purple-500/20 rounded-full blur-xl" />
 
-        {/* Header */}
+    
         <div className="text-center mb-8 relative">
           <h1 className="text-4xl font-bold text-white mb-2 drop-shadow-lg">Welcome Back</h1>
           <p className="text-white/80">Please enter your details to sign in</p>
         </div>
 
-        {/* Form */}
+
         <form className="space-y-6 relative">
-          {/* Email Field */}
+  
           <div className="space-y-2">
             <label className="block text-sm font-medium text-white/90 drop-shadow">
               Email Address
@@ -52,7 +52,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Password Field */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-white/90 drop-shadow">
               Password
@@ -83,7 +82,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Forgot Password Link */}
           <div className="flex justify-end">
             <Link
               to="/forgot-password"
@@ -93,7 +91,6 @@ const Login = () => {
             </Link>
           </div>
 
-          {/* Login Button */}
           <Link
             to="/Home"
             className="w-full flex justify-center py-3 px-4 rounded-lg text-sm font-medium
@@ -104,7 +101,6 @@ const Login = () => {
             Sign in
           </Link>
 
-          {/* Sign Up Link */}
           <div className="text-center text-sm">
             <span className="text-white/80">Don't have an account? </span>
             <Link

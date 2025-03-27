@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 
-const images = [
-  "https://via.placeholder.com/600x300?text=Image+1",
-  "https://via.placeholder.com/600x300?text=Image+2",
-  "https://via.placeholder.com/600x300?text=Image+3",
-];
+// const images = [
+//   "https://via.placeholder.com/600x300?text=Image+1",
+//   "https://via.placeholder.com/600x300?text=Image+2",
+//   "https://via.placeholder.com/600x300?text=Image+3",
+// ];
 
 const ImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

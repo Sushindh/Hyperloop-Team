@@ -4,28 +4,26 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import Navbar from './Navbar';
 
-// Constants for the route
 const CHENNAI_COORDS = [13.0827, 80.2707];
-const BANGALORE_COORDS = [12.9716, 77.5946];
-const JOURNEY_DISTANCE = 350;
+const MUMBAI_COORDS = [19.0760, 72.8777];
+const JOURNEY_DISTANCE = 1338; // Distance in KM
 
-// Intermediate points for train and road routes
 const TRAIN_ROUTE = [
   CHENNAI_COORDS,
-  [12.9165, 79.1325], // Vellore
-  [12.5266, 78.2141], // Krishnagiri
-  BANGALORE_COORDS
+  [17.3850, 78.4867], // Hyderabad
+  [18.5204, 73.8567], // Pune
+  MUMBAI_COORDS
 ];
 
 const ROAD_ROUTE = [
   CHENNAI_COORDS,
-  [12.8231, 79.7027], // Kanchipuram
-  [12.9609, 79.1627], // Vellore
-  [12.7409, 78.3525], // Krishnagiri
-  BANGALORE_COORDS
+  [15.829, 78.0368], // Kurnool
+  // [17.3850, 78.4867], // Hyderabad
+  [17.666, 75.905], //Solapur
+  [18.5204, 73.8567], // Pune
+  MUMBAI_COORDS
 ];
 
-// Custom icons
 const createIcon = (url) => new L.Icon({
   iconUrl: url,
   iconSize: [30, 30],
@@ -37,7 +35,6 @@ const trainIcon = createIcon('https://cdn-icons-png.flaticon.com/128/713/713309.
 const carIcon = createIcon('https://cdn-icons-png.flaticon.com/512/744/744465.png');
 const hyperloopIcon = createIcon('https://cdn-icons-png.flaticon.com/128/8397/8397575.png');
 
-// Animation component for the moving markers
 const AnimatedMarker = ({ route, icon, duration }) => {
   const [position, setPosition] = useState(route[0]);
   const map = useMap();
@@ -66,14 +63,13 @@ const AnimatedMarker = ({ route, icon, duration }) => {
     };
 
     requestId = requestAnimationFrame(animate);
-
     return () => cancelAnimationFrame(requestId);
   }, [route, duration, map]);
 
   return <Marker position={position} icon={icon} />;
 };
 
-const HyperloopRouteMap = () => {
+const TransportRouteMap = () => {
   const [activeTab, setActiveTab] = useState('map');
   const [selectedMode, setSelectedMode] = useState('hyperloop');
 
@@ -87,11 +83,11 @@ const HyperloopRouteMap = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="bg-[#6366F1] h-20" >< Navbar/></div>
-      <header className="text-indigo-600 p-4 ">
+      <div className="bg-[#6366F1] h-20"><Navbar /></div>
+      <header className="text-indigo-600 p-4">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold">Chennai to Bangalore Route Comparison</h1>
-          <p className="mt-2 text-indigo-500 ">Experience the future of transportation</p>
+          <h1 className="text-3xl font-bold">Chennai to Mumbai Route Comparison</h1>
+          <p className="mt-2 text-indigo-500">Comparing different modes of transportation</p>
         </div>
       </header>
 
@@ -116,8 +112,8 @@ const HyperloopRouteMap = () => {
             {activeTab === 'map' && (
               <div className="h-[600px]">
                 <MapContainer
-                  center={[(CHENNAI_COORDS[0] + BANGALORE_COORDS[0]) / 2, (CHENNAI_COORDS[1] + BANGALORE_COORDS[1]) / 2]}
-                  zoom={7}
+                  center={[(CHENNAI_COORDS[0] + MUMBAI_COORDS[0]) / 2, (CHENNAI_COORDS[1] + MUMBAI_COORDS[1]) / 2]}
+                  zoom={6}
                   style={{ height: '100%', width: '100%' }}
                 >
                   <TileLayer
@@ -125,23 +121,23 @@ const HyperloopRouteMap = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   />
                   <Polyline positions={TRAIN_ROUTE} color="#3B82F6" weight={3}>
-                    <Popup>Train Route</Popup>
+                    <Popup>Train Route via Hyderabad and Pune</Popup>
                   </Polyline>
                   <Polyline positions={ROAD_ROUTE} color="#EF4444" weight={3}>
-                    <Popup>Road Route</Popup>
+                    <Popup>Road Route via Major Cities</Popup>
                   </Polyline>
-                  <Polyline positions={[CHENNAI_COORDS, BANGALORE_COORDS]} color="#8B5CF6" weight={3}>
-                    <Popup>Hyperloop Route</Popup>
+                  <Polyline positions={[CHENNAI_COORDS, MUMBAI_COORDS]} color="#8B5CF6" weight={3}>
+                    <Popup>Hyperloop Direct Route</Popup>
                   </Polyline>
                   <Marker position={CHENNAI_COORDS}>
                     <Popup>Chennai</Popup>
                   </Marker>
-                  <Marker position={BANGALORE_COORDS}>
-                    <Popup>Bangalore</Popup>
+                  <Marker position={MUMBAI_COORDS}>
+                    <Popup>Mumbai</Popup>
                   </Marker>
-                  <AnimatedMarker route={TRAIN_ROUTE} icon={trainIcon} duration={30000} />
+                  <AnimatedMarker route={TRAIN_ROUTE} icon={trainIcon} duration={50000} />
                   <AnimatedMarker route={ROAD_ROUTE} icon={carIcon} duration={40000} />
-                  <AnimatedMarker route={[CHENNAI_COORDS, BANGALORE_COORDS]} icon={hyperloopIcon} duration={10000} />
+                  <AnimatedMarker route={[CHENNAI_COORDS, MUMBAI_COORDS]} icon={hyperloopIcon} duration={10000} />
                 </MapContainer>
               </div>
             )}
@@ -180,25 +176,25 @@ const HyperloopRouteMap = () => {
                     <tr>
                       <td>Travel Time</td>
                       <td>
-                        {selectedMode === 'hyperloop' && '35 minutes'}
-                        {selectedMode === 'train' && '4.5-7 hours'}
-                        {selectedMode === 'car' && '6-7 hours'}
+                        {selectedMode === 'hyperloop' && '2.5 hours'}
+                        {selectedMode === 'train' && '24-26 hours'}
+                        {selectedMode === 'car' && '20-22 hours'}
                       </td>
                     </tr>
                     <tr>
                       <td>Average Speed</td>
                       <td>
                         {selectedMode === 'hyperloop' && '600 km/h'}
-                        {selectedMode === 'train' && '50-80 km/h'}
-                        {selectedMode === 'car' && '50-60 km/h'}
+                        {selectedMode === 'train' && '55-60 km/h'}
+                        {selectedMode === 'car' && '65-70 km/h'}
                       </td>
                     </tr>
                     <tr>
                       <td>Cost</td>
                       <td>
-                        {selectedMode === 'hyperloop' && '₹2000-3000 (estimated)'}
-                        {selectedMode === 'train' && '₹500-1500'}
-                        {selectedMode === 'car' && '₹2000-3000 (fuel + tolls)'}
+                        {selectedMode === 'hyperloop' && '₹5000-7000 (estimated)'}
+                        {selectedMode === 'train' && '₹1500-3000'}
+                        {selectedMode === 'car' && '₹6000-8000 (fuel + tolls)'}
                       </td>
                     </tr>
                     <tr>
@@ -207,6 +203,14 @@ const HyperloopRouteMap = () => {
                         {selectedMode === 'hyperloop' && 'Low (electric powered)'}
                         {selectedMode === 'train' && 'Medium'}
                         {selectedMode === 'car' && 'High (fossil fuel dependent)'}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Stops</td>
+                      <td>
+                        {selectedMode === 'hyperloop' && 'Direct route'}
+                        {selectedMode === 'train' && 'Multiple stops via Hyderabad, Pune'}
+                        {selectedMode === 'car' && 'Flexible stops via major cities'}
                       </td>
                     </tr>
                   </tbody>
@@ -218,10 +222,11 @@ const HyperloopRouteMap = () => {
           <div className="mt-8 bg-white p-6 rounded-lg shadow-lg">
             <h3 className="text-xl font-bold mb-4">Key Highlights</h3>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Hyperloop reduces travel time by up to 92% compared to traditional modes</li>
-              <li>Potential for significant reduction in carbon emissions</li>
-              <li>Hyperloop technology is still in development and costs are estimated</li>
-              <li>Traditional modes offer more flexibility in terms of stops and schedules</li>
+              <li>Total distance between Chennai and Mumbai: {JOURNEY_DISTANCE} km</li>
+              <li>Hyperloop could reduce travel time by up to 90% compared to traditional modes</li>
+              <li>Train route offers comfortable overnight journey options</li>
+              <li>Road journey provides flexibility but takes the longest time</li>
+              <li>Each mode offers different trade-offs between cost, time, and convenience</li>
             </ul>
           </div>
         </div>
@@ -229,11 +234,11 @@ const HyperloopRouteMap = () => {
 
       <footer className="bg-gray-800 text-white py-4 mt-8">
         <div className="max-w-6xl mx-auto text-center">
-          <p>&copy; 2024 Hyperloop Route Comparison. All rights reserved.</p>
+          <p>&copy; 2025 Transport Route Comparison. All rights reserved.</p>
         </div>
       </footer>
     </div>
   );
 };
 
-export default HyperloopRouteMap;
+export default TransportRouteMap;

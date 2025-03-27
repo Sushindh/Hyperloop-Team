@@ -218,7 +218,7 @@ const SustainableTrainCommunication = () => {
       <footer className="bg-gray-900 text-white py-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p>© 2024 Sustainable Train Communication Project</p>
+            <p>© 2025 Sustainable Train Communication Project</p>
             <nav className="mt-4 md:mt-0">
               {['Privacy Policy', 'Terms of Service', 'Contact Us'].map((item) => (
                 <a

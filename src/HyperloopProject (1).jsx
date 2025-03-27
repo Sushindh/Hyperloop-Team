@@ -4,18 +4,7 @@ import HP1 from "./HyperloopProject (1).jsx"
 import Map from "./Map12.jsx"
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  AreaChart,
-  Area
-} from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts'
 import { motion } from "framer-motion"
 import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap, useMapEvents } from 'react-leaflet'
 import L from 'leaflet'
@@ -23,7 +12,7 @@ import 'leaflet/dist/leaflet.css'
 
 import Navbar from './Navbar.jsx'
 
-// Constants
+
 const MAX_SPEED = 600
 const ACCELERATION = 30
 const DECELERATION = 20
@@ -31,23 +20,22 @@ const MIN_SPEED = 10
 const BASE_DATA_RATE = 100
 const SIGNAL_SPEED = 200000
 const BASE_LATENCY = 0.5
-const JOURNEY_DISTANCE = 350
+const JOURNEY_DISTANCE = 1318
 const MAX_PASSENGERS = 28
 
 // Chennai coordinates
 const CHENNAI_COORDS = [13.0827, 80.2707]
-// Bangalore coordinates
-const BANGALORE_COORDS = [12.9716, 77.5946]
+// Mumbai coordinates
+const MUMBAI_COORDS = [19.0760, 72.8777];
 
-// Stations
+
 const STATIONS = [
   { name: "Chennai", coords: CHENNAI_COORDS, distance: 0 },
-  { name: "Vellore", coords: [12.9165, 79.1325], distance: 120 },
-  { name: "Krishnagiri", coords: [12.5266, 78.2141], distance: 230 },
-  { name: "Bangalore", coords: BANGALORE_COORDS, distance: JOURNEY_DISTANCE }
+  { name: "Pune", coords: [18.5204, 73.8567], distance: 1190 },
+  { name: "Mumbai", coords: MUMBAI_COORDS, distance: JOURNEY_DISTANCE }
 ]
 
-// Calculate intermediate point
+
 const calculateIntermediatePoint = (start, end, fraction) => [
   start[0] + (end[0] - start[0]) * fraction,
   start[1] + (end[1] - start[1]) * fraction
@@ -64,13 +52,12 @@ const trainIcon = new L.Icon({
 function MapComponent({ totalDistance, weather }) {
   const map = useMap()
   const fraction = totalDistance / JOURNEY_DISTANCE
-  const currentPosition = calculateIntermediatePoint(CHENNAI_COORDS, BANGALORE_COORDS, fraction)
+  const currentPosition = calculateIntermediatePoint(CHENNAI_COORDS, MUMBAI_COORDS, fraction)
 
   useEffect(() => {
     map.setView(currentPosition, map.getZoom())
   }, [map, currentPosition])
 
-  // Add a click handler to zoom in on the train
   useMapEvents({
     click(e) {
       const clickedPoint = e.latlng
@@ -88,7 +75,7 @@ function MapComponent({ totalDistance, weather }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Polyline positions={[CHENNAI_COORDS, BANGALORE_COORDS]} color="#007AFF" weight={3} />
+      <Polyline positions={[CHENNAI_COORDS, MUMBAI_COORDS]} color="#007AFF" weight={3} />
       {STATIONS.map((station, index) => (
         <Marker key={index} position={station.coords}>
           <Popup>
@@ -455,13 +442,12 @@ function HyperloopControlCenter() {
 
     setElapsedTime(prevTime => prevTime + 1)
 
-    // Simulate weather changes
+
     if (Math.random() < 0.05) {
       const weathers = ['Sunny', 'Cloudy', 'Rainy']
       setWeather(weathers[Math.floor(Math.random() * weathers.length)])
     }
 
-    // Update passenger count at stations
     const currentStation = STATIONS.find(station => Math.abs(station.distance - totalDistance) < 1)
     if (currentStation) {
       const passengerChange = Math.floor(Math.random() * 5) - 2 // Random change between -2 and 2
@@ -494,7 +480,7 @@ function HyperloopControlCenter() {
         setIsJourneyComplete(false)
         setHasJourneyStarted(true)
         setSystemStatus('operational')
-        alert("New Journey Started: Beginning a new Hyperloop journey from Chennai to Bangalore.")
+        alert("New Journey Started: Beginning a new Hyperloop journey from Chennai to Mumbai.")
       } else {
         alert("Journey Resumed: Continuing the current journey.")
       }
@@ -526,7 +512,7 @@ function HyperloopControlCenter() {
     if (totalDistance >= JOURNEY_DISTANCE) {
       setIsRunning(false)
       setIsJourneyComplete(true)
-      alert(`Journey Completed! You've reached Bangalore. Total distance covered: ${totalDistance.toFixed(2)} km.`)
+      alert(`Journey Completed! You've reached Mumbai. Total distance covered: ${totalDistance.toFixed(2)} km.`)
     }
   }, [totalDistance])
 
@@ -546,7 +532,7 @@ function HyperloopControlCenter() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
             <h1 className="text-4xl font-semibold text-[#1D1D1F]">Hyperloop Control Center</h1>
-            <p className="text-lg text-[#86868B]">Chennai to Bangalore Route Monitor</p>
+            <p className="text-lg text-[#86868B]">Chennai to Mumbai Route Monitor</p>
           </div>
           <RealtimeClock />
         </div>
@@ -685,7 +671,7 @@ function HyperloopControlCenter() {
                     <span className="font-medium text-[#1D1D1F]">Chennai</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="font-medium text-[#1D1D1F]">Bangalore</span>
+                    <span className="font-medium text-[#1D1D1F]">Mumbai</span>
                   </div>
                 </div>
               </div>
@@ -781,7 +767,7 @@ export default function HyperloopProject() {
       <div className="max-w-4xl mx-auto space-y-8">
         <h1 className="text-4xl font-bold text-[#1D1D1F]">Advanced Hyperloop Journey Simulator</h1>
         <p className="text-xl text-[#86868B]">
-          Welcome to the cutting-edge Hyperloop Journey Simulator, designed to showcase the future of high-speed transportation between Chennai and Bangalore.
+          Welcome to the cutting-edge Hyperloop Journey Simulator, designed to showcase the future of high-speed transportation between Chennai and Mumbai.
         </p>
         <div className="bg-white shadow-lg rounded-2xl overflow-hidden">
           <div className="pb-4 bg-gradient-to-r from-[#007AFF] to-[#5856D6] p-4">
