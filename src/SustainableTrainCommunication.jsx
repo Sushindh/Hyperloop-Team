@@ -221,16 +221,15 @@ const SustainableTrainCommunication = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p>© 2025 Sustainable Train Communication Project</p>
             <nav className="mt-4 md:mt-0">
-              {['Privacy Policy', 'Terms of Service'].map((item) => (
-                <a
+              {['Privacy Policy','Terms of Service','Contact us'].map((item) => (
+                <Link
                   key={item}
-                  href="#"
+                  to = {item==="Privacy Policy"?"/privacy" : item==="Terms of Service"? "/TOS" : "/Contact" }
                   className="hover:text-gray-300 transition-colors mx-3"
                 >
                   {item}
-                </a>
+                </Link>
               ))}
-              <Link to="/Contact" className='className="hover:text-gray-300 transition-colors mx-3"' >Contact us</Link>
             </nav>
           </div>
         </div>

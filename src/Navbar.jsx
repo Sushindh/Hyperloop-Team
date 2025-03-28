@@ -16,7 +16,6 @@ function Navbar() {
         const activeClasses = "text-white backdrop-blur-sm bg-emerald-100/30";
         const hoverClasses = "hover:text-white hover:backdrop-blur-sm hover:bg-emerald-100/30";
         
-
         const mobileClasses = "w-full h-12 rounded-md mb-2";
     
         const desktopClasses = `h-12 ${path === "/Home" ? "w-20 rounded-sm" : "w-52 rounded-md"}`;
@@ -43,7 +42,7 @@ function Navbar() {
             </div>
             <div className={`
                 ${isMenuOpen 
-                    ? 'flex flex-col absolute top-16 left-0 right-0 bg-blue-500 p-4 shadow-lg rounded-lg mx-4' 
+                    ? 'flex flex-col absolute top-16 left-0 right-0 bg-blue-500 p-2 shadow-lg rounded-lg mx-4' 
                     : 'hidden'
                 } 
                 md:flex md:flex-row md:static md:justify-center md:items-center md:pt-2 md:bg-transparent md:shadow-none
@@ -52,7 +51,7 @@ function Navbar() {
                 <Link to="/About" className={getNavLinkClass("/About")}>About The Project</Link>
                 <Link to="/HP1" className={getNavLinkClass("/HP1")}>Hyperloop Simulation</Link>
                 <Link to="/Map" className={getNavLinkClass("/Map")}>Current Routes</Link>
-                <Link to="/Contact" className={getNavLinkClass("/Contact")}>Contact Us</Link>
+                {/* <Link to="/Contact" className={getNavLinkClass("/Contact")}>Contact Us</Link> */}
 
             </div>
         </nav>
