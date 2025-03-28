@@ -5,6 +5,7 @@ import About from "./About.jsx"
 import Login from "./Login.jsx"
 import Map from "./Map12.jsx"
 import HP1 from "./HyperloopProject (1).jsx"
+import Contact from "./Contact.jsx"
 
 function App() {
   return(
@@ -17,6 +18,7 @@ function App() {
          <Route path="/About" element={<About />} />
          <Route path="/HP1" element={<HP1 />} />
          <Route path="/Map" element={<Map />} />
+         <Route path="/Contact" element={<Contact />} />
      </Routes>
    </BrowserRouter>
     </div>

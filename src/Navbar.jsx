@@ -2,6 +2,7 @@ import Home from "./Home.jsx"
 import About from "./About.jsx"
 import HP1 from "./HyperloopProject (1).jsx"
 import Map from "./Map12.jsx"
+import Contact from "./Contact.jsx"
 import { Link, useLocation } from "react-router-dom"
 import { useState } from "react"
 import { Menu, X } from "lucide-react" 
@@ -51,6 +52,7 @@ function Navbar() {
                 <Link to="/About" className={getNavLinkClass("/About")}>About The Project</Link>
                 <Link to="/HP1" className={getNavLinkClass("/HP1")}>Hyperloop Simulation</Link>
                 <Link to="/Map" className={getNavLinkClass("/Map")}>Current Routes</Link>
+                <Link to="/Contact" className={getNavLinkClass("/Contact")}>Contact Us</Link>
 
             </div>
         </nav>
